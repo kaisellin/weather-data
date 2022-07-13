@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.selector.ByTagAndText;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
@@ -15,18 +17,31 @@ import static com.codeborne.selenide.Selenide.*;
 public class WeatherSearchingTests {
 
     @Test
-    public void canSearchWeather() {
+    void weatherTest() {
         open("https://www.visualcrossing.com");
 
-        if ($(new ByTagAndText("button", "Accept all cookies")).isDisplayed()) {
-            $(new ByTagAndText("button", "Accept all cookies")).click();
-            sleep(10000);
-        }
+        sleep(2000);
 
-        new LocationWeather().locationWeatherSearch("Tartu");
 
-        $(withText("Tartu")).shouldBe(visible);
+        $(new ByTagAndText("button", "Accept all cookies")).click();
 
+        sleep(2000);
+
+        $(By.linkText("Weather Data")).click();
+
+        $(By.id("wxlocation")).setValue("Tartu");
+
+        sleep(2000);
+
+        $(new ByTagAndText("button", "Search")).click();
+
+        sleep(2000);
+
+        $(new ByTagAndText("h1", "Weather History Dashboard for Tartu")).shouldBe(Condition.visible);
+        $("#locationDropdownMenuButton").shouldHave(Condition.text("Tartu"));
+
+
+        sleep(2000);
     }
 
     @Test
