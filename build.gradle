@@ -15,7 +15,6 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'junit:junit:4.13.1'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation("com.google.guava:guava:24.0-jre")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'com.codeborne:selenide:6.6.6'
 
